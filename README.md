@@ -1,4 +1,4 @@
-# Quasar App
+# Zim Vue Path Demo
 
 > npm install -g vue-cli
 
