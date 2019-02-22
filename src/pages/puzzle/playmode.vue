@@ -2,6 +2,15 @@
 	<div style="padding:10vh;">
 		<div id="componentView" class="ComponentViewS"></div>
 		<q-btn style="margin-left:5px" color="primary" no-caps @click="showHint()" id="hintBut">Show Hint</q-btn>
+		<br>
+		<q-btn
+			id="rotBut"
+			style="margin:5px"
+			color="primary"
+			no-caps
+			@click="rotateSelected()"
+			:disabled="selectedObj === null"
+		>Rotate</q-btn>
 	</div>
 </template>
 
@@ -30,7 +39,8 @@
 				stageH: 0,
 				stage: null,
 				completed: false,
-				hintShow: false
+				hintShow: false,
+				selectedObj: null
 			};
 		},
 		methods: {
@@ -386,32 +396,34 @@
 
 					this.stage.update();
 
-					this.sTri1.on("dblclick", e => {
-						this.sTri1.rotation = (this.sTri1.rotation + 45) % 360;
+					this.sTri1.on("click", e => {
+						this.selectedObj = this.sTri1;
 						this.stage.update();
 					});
-					this.sTri2.on("dblclick", e => {
-						this.sTri2.rotation = (this.sTri2.rotation + 45) % 360;
+					this.sTri2.on("click", e => {
+						this.selectedObj = this.sTri2;
 						this.stage.update();
 					});
-					this.lTri1.on("dblclick", e => {
-						this.lTri1.rotation = (this.lTri1.rotation + 45) % 360;
+					this.lTri1.on("click", e => {
+						this.selectedObj = this.lTri1;
 						this.stage.update();
 					});
-					this.lTri2.on("dblclick", e => {
-						this.lTri2.rotation = (this.lTri2.rotation + 45) % 360;
+					this.lTri2.on("click", e => {
+						this.selectedObj = this.lTri2;
 						this.stage.update();
 					});
-					this.mTri.on("dblclick", e => {
-						this.mTri.rotation = (this.mTri.rotation + 45) % 360;
+					this.mTri.on("click", e => {
+						this.selectedObj = this.mTri;
 						this.stage.update();
 					});
-					this.mRect.on("dblclick", e => {
-						this.mRect.rotation = (this.mRect.rotation + 45) % 360;
+
+					this.mRect.on("click", e => {
+						this.selectedObj = this.mRect;
 						this.stage.update();
 					});
-					this.mParel.on("dblclick", e => {
-						this.mParel.rotation = (this.mParel.rotation + 45) % 360;
+
+					this.mParel.on("click", e => {
+						this.selectedObj = this.mParel;
 						this.stage.update();
 					});
 
@@ -454,6 +466,10 @@
 						this.checkAnswer();
 					});
 				}); // end of ready
+			},
+			rotateSelected() {
+				this.selectedObj.rotation = (this.selectedObj.rotation + 45) % 360;
+				this.stage.update();
 			},
 			onMoveEvent(obj, r) {
 				{
@@ -541,6 +557,7 @@
 				this.completed = true;
 				$("#componentView").html("Completed");
 				$("#hintBut").hide();
+				$("#rotBut").hide();
 				this.stage.update();
 				return true;
 			},
