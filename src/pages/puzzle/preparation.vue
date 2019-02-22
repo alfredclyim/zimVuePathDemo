@@ -266,21 +266,29 @@
 						this.onMoveEvent(this.mTri, 40000);
 					});
 					this.mRect.on("pressmove", e => {
-						this.mRect.x = this.mRect.x - (this.mRect.x % Math.sqrt(8));
-						this.mRect.y = this.mRect.y - (this.mRect.y % Math.sqrt(8));
+						this.mRect.x =
+							parseFloat(parseInt(this.mRect.x / Math.sqrt(8))) *
+							Math.sqrt(8);
+						this.mRect.y =
+							parseFloat(parseInt(this.mRect.y / Math.sqrt(8))) *
+							Math.sqrt(8);
 					});
 					this.mParel.on("pressmove", e => {
 						this.mParel.x =
-							this.mParel.x - (this.mParel.x % Math.sqrt(8));
+							parseFloat(parseInt(this.mParel.x / Math.sqrt(8))) *
+							Math.sqrt(8);
 						this.mParel.y =
-							this.mParel.y - (this.mParel.y % Math.sqrt(8));
+							parseFloat(parseInt(this.mParel.y / Math.sqrt(8))) *
+							Math.sqrt(8);
 					});
 				}); // end of ready
 			},
 			onMoveEvent(obj, r) {
 				{
-					obj.x = obj.x - (obj.x % Math.sqrt(8));
-					obj.y = obj.y - (obj.y % Math.sqrt(8));
+					obj.x =
+						parseFloat(parseInt(obj.x / Math.sqrt(8))) * Math.sqrt(8);
+					obj.y =
+						parseFloat(parseInt(obj.y / Math.sqrt(8))) * Math.sqrt(8);
 				}
 				this.stage.update();
 			},
