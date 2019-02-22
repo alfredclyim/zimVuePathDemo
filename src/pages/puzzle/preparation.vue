@@ -160,12 +160,37 @@
 					this.mTri.regX = 0;
 					this.mTri.regY = -50;
 
+					this.mParel = new zim.Container()
+						.place("Shape")
+						.setBounds(
+							50,
+							350 - Math.sqrt(5000),
+							Math.sqrt(5000),
+							3 * Math.sqrt(5000)
+						)
+						.reg(50, 350);
+
+					this.mParel.y += 350;
+					this.mParel.x += 50;
+					var _par = new zim.Shape();
+					_par.graphics
+						.setStrokeStyle(1)
+						.beginStroke("#666666")
+						.beginFill(specRed)
+						.moveTo(50, 350)
+						.lineTo(50, 350 + 2 * Math.sqrt(5000))
+						.lineTo(50 + Math.sqrt(5000), 350 + Math.sqrt(5000))
+						.lineTo(50 + Math.sqrt(5000), 350 - Math.sqrt(5000))
+						.lineTo(50, 350);
+					this.mParel.addChild(_par);
+
 					rightPanel.addChild(this.sTri1);
 					rightPanel.addChild(this.sTri2);
 					rightPanel.addChild(this.lTri1);
 					rightPanel.addChild(this.lTri2);
 					rightPanel.addChild(this.mTri);
 					rightPanel.addChild(this.mRect);
+					rightPanel.addChild(this.mParel);
 					rightPanel.x = 600;
 					rightPanel.y = 0;
 
@@ -220,6 +245,11 @@
 						this.stage.update();
 					});
 
+					this.mParel.on("dblclick", e => {
+						this.mParel.rotation = (this.mParel.rotation + 45) % 360;
+						this.stage.update();
+					});
+
 					this.sTri1.on("pressmove", e => {
 						this.onMoveEvent(this.sTri1, 20000);
 					});
@@ -238,6 +268,10 @@
 					this.mRect.on("pressmove", e => {
 						this.mRect.x = this.mRect.x - (this.mRect.x % 10);
 						this.mRect.y = this.mRect.y - (this.mRect.y % 10);
+					});
+					this.mParel.on("pressmove", e => {
+						this.mParel.x = this.mParel.x - (this.mParel.x % 10);
+						this.mParel.y = this.mParel.y - (this.mParel.y % 10);
 					});
 				}); // end of ready
 			},
@@ -285,6 +319,12 @@
 						x: this.mRect.x,
 						y: this.mRect.y,
 						rot: this.mRect.rotation
+					},
+					mParel: {
+						used: this.mParel.x > 0 ? false : true,
+						x: this.mParel.x,
+						y: this.mParel.y,
+						rot: this.mParel.rotation
 					}
 				};
 

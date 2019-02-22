@@ -18,12 +18,14 @@
 				lTri1: null,
 				lTri2: null,
 				mRect: null,
+				mParel: null,
 				HsTri1: null,
 				HsTri2: null,
 				HmTri: null,
 				HlTri1: null,
 				HlTri2: null,
 				HmRect: null,
+				HmParel: null,
 				stageW: 0,
 				stageH: 0,
 				stage: null,
@@ -169,12 +171,37 @@
 					this.mTri.regX = 0;
 					this.mTri.regY = -50;
 
+					this.mParel = new zim.Container()
+						.place("Shape")
+						.setBounds(
+							50,
+							350 - Math.sqrt(5000),
+							Math.sqrt(5000),
+							3 * Math.sqrt(5000)
+						)
+						.reg(50, 350);
+					this.mParel.y += 350;
+					this.mParel.x += 50;
+					var _par = new zim.Shape();
+					_par.graphics
+						.setStrokeStyle(1)
+						.beginStroke("#666666")
+						.beginFill(specRed)
+						.moveTo(50, 350)
+						.lineTo(50, 350 + 2 * Math.sqrt(5000))
+						.lineTo(50 + Math.sqrt(5000), 350 + Math.sqrt(5000))
+						.lineTo(50 + Math.sqrt(5000), 350 - Math.sqrt(5000))
+						.lineTo(50, 350);
+					this.mParel.addChild(_par);
+
 					if (this.mapData.sTri1.used) rightPanel.addChild(this.sTri1);
 					if (this.mapData.sTri2.used) rightPanel.addChild(this.sTri2);
 					if (this.mapData.lTri1.used) rightPanel.addChild(this.lTri1);
 					if (this.mapData.lTri2.used) rightPanel.addChild(this.lTri2);
 					if (this.mapData.mTri.used) rightPanel.addChild(this.mTri);
 					if (this.mapData.mRect.used) rightPanel.addChild(this.mRect);
+					if (this.mapData.mParel.used) rightPanel.addChild(this.mParel);
+
 					rightPanel.x = 600;
 					rightPanel.y = 0;
 
@@ -344,6 +371,33 @@
 						this.HmRect.rotation = this.mapData.mRect.rot;
 						leftPanel.addChild(this.HmRect);
 					}
+					if (this.mapData.mParel.used === true) {
+						var kObj = new zim.Container()
+							.setBounds(
+								50,
+								350 - Math.sqrt(5000),
+								Math.sqrt(5000),
+								3 * Math.sqrt(5000)
+							)
+							.reg(50, 350);
+
+						this.HmParel = new zim.Shape();
+						this.HmParel.graphics
+							.setStrokeStyle(1)
+							.beginStroke("#CCCCCC")
+							.beginFill("#CCCCCC")
+							.moveTo(50, 350)
+							.lineTo(50, 350 + 2 * Math.sqrt(5000))
+							.lineTo(50 + Math.sqrt(5000), 350 + Math.sqrt(5000))
+							.lineTo(50 + Math.sqrt(5000), 350 - Math.sqrt(5000))
+							.lineTo(50, 350);
+
+						kObj.x = this.mapData.mParel.x + 600;
+						kObj.y = this.mapData.mParel.y;
+						kObj.rot(this.mapData.mParel.rot);
+						kObj.addChild(this.HmParel);
+						leftPanel.addChild(kObj);
+					}
 					/* map End */
 
 					leftPanel.x = 0;
@@ -378,6 +432,10 @@
 						this.mRect.rotation = (this.mRect.rotation + 45) % 360;
 						this.stage.update();
 					});
+					this.mParel.on("dblclick", e => {
+						this.mParel.rotation = (this.mParel.rotation + 45) % 360;
+						this.stage.update();
+					});
 
 					this.sTri1.on("pressmove", e => {
 						this.onMoveEvent(this.sTri1, 20000);
@@ -402,6 +460,11 @@
 					this.mRect.on("pressmove", e => {
 						this.mRect.x = this.mRect.x - (this.mRect.x % 10);
 						this.mRect.y = this.mRect.y - (this.mRect.y % 10);
+						this.checkAnswer();
+					});
+					this.mParel.on("pressmove", e => {
+						this.mParel.x = this.mParel.x - (this.mParel.x % 10);
+						this.mParel.y = this.mParel.y - (this.mParel.y % 10);
 						this.checkAnswer();
 					});
 				}); // end of ready
@@ -477,6 +540,16 @@
 					)
 						return false;
 				}
+				if (this.mapData.mParel.used) {
+					if (
+						!this.compareObjects(
+							this.mParel,
+							this.mParel,
+							this.mapData.mParel
+						)
+					)
+						return false;
+				}
 				this.completed = true;
 				$("#componentView").html("Completed");
 				$("#hintBut").hide();
@@ -484,6 +557,9 @@
 				return true;
 			},
 			compareObjects(obj1, obj2, obj3) {
+				console.log(obj1.x + " " + obj3.x);
+				console.log(obj1.y + " " + obj3.y);
+				console.log(obj1.rotation + " " + obj3.rot);
 				return (
 					(obj1.x === obj3.x &&
 						obj1.y === obj3.y &&
@@ -496,6 +572,16 @@
 			showHint() {
 				this.hintShow = !this.hintShow;
 				var bColor = this.hintShow ? "#AAAAAA" : "#CCCCCC";
+				if (this.HmParel) {
+					this.HmParel.graphics
+						.setStrokeStyle(1)
+						.beginStroke(bColor)
+						.moveTo(50, 350)
+						.lineTo(50, 350 + 2 * Math.sqrt(5000))
+						.lineTo(50 + Math.sqrt(5000), 350 + Math.sqrt(5000))
+						.lineTo(50 + Math.sqrt(5000), 350 - Math.sqrt(5000))
+						.lineTo(50, 350);
+				}
 				if (this.HsTri1) this.HsTri1.borderColor = bColor;
 				if (this.HsTri2) this.HsTri2.borderColor = bColor;
 				if (this.HlTri1) this.HlTri1.borderColor = bColor;
