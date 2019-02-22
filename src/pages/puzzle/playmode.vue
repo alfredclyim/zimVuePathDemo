@@ -549,11 +549,15 @@
 				console.log(obj1.y + " " + obj3.y);
 				console.log(obj1.rotation + " " + obj3.rot);
 				return (
-					(obj1.x === obj3.x &&
-						obj1.y === obj3.y &&
+					(obj1.x >= obj3.x - Math.sqrt(8) &&
+						obj1.x <= obj3.x + Math.sqrt(8) &&
+						obj1.y >= obj3.y - Math.sqrt(8) &&
+						obj1.y <= obj3.y + Math.sqrt(8) &&
 						obj1.rotation === obj3.rot) ||
-					(obj2.x === obj3.x &&
-						obj2.y === obj3.y &&
+					(obj2.x >= obj3.x - Math.sqrt(8) &&
+						obj2.x <= obj3.x + Math.sqrt(8) &&
+						obj2.y >= obj3.y - Math.sqrt(8) &&
+						obj2.y <= obj3.y + Math.sqrt(8) &&
 						obj2.rotation === obj3.rot)
 				);
 			},

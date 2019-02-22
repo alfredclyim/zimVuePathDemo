@@ -32,6 +32,7 @@
 					color: "#FFFFFF"
 				});
 
+				//this.frame.loadAssets(["rotateIcon.png"], "../../assets/");
 				this.frame.on("ready", () => {
 					zog("ready from ZIM Frame");
 
@@ -61,8 +62,6 @@
 					);
 
 					var rotIcon = [];
-					//this.frame.loadAssets(["rotateIcon.png"], "../../assets/");
-					//console.log(this.frame);
 					//rotIcon = this.frame.asset("rotateIcon.png").clone();
 					//this.sTri1.addChild(rotIcon);
 
