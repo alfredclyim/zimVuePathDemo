@@ -60,6 +60,12 @@
 						)
 					);
 
+					var rotIcon = [];
+					//this.frame.loadAssets(["rotateIcon.png"], "../../assets/");
+					//console.log(this.frame);
+					//rotIcon = this.frame.asset("rotateIcon.png").clone();
+					//this.sTri1.addChild(rotIcon);
+
 					this.sTri1.regX = 0;
 					this.sTri1.regY = -Math.sqrt(20000) / 4;
 
@@ -267,8 +273,7 @@
 					});
 					this.mRect.on("pressmove", e => {
 						this.mRect.x =
-							parseFloat(parseInt(this.mRect.x / Math.sqrt(8))) *
-							Math.sqrt(8);
+							parseFloat(parseInt(this.mRect.x / 3)) * Math.sqrt(8);
 						this.mRect.y =
 							parseFloat(parseInt(this.mRect.y / Math.sqrt(8))) *
 							Math.sqrt(8);

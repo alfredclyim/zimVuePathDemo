@@ -222,17 +222,13 @@
 
 					/* load map */
 					if (this.mapData.sTri1.used === true) {
-						var kObj = new zim.Triangle(
-							Math.sqrt(20000),
-							100,
-							100,
-							"#CCCCCC"
+						var kObj = new zim.Container()
+							.rot(this.mapData.sTri1.rot)
+							.reg()
+							.loc(this.mapData.sTri1.x + 600, this.mapData.sTri1.y);
+						kObj.addChild(
+							new zim.Triangle(Math.sqrt(20000), 100, 100, "#CCCCCC")
 						);
-						kObj.regY -= Math.sqrt(20000) / 4;
-						kObj.x = this.mapData.sTri1.x + 600;
-						kObj.y = this.mapData.sTri1.y;
-						kObj.rotation = this.mapData.sTri1.rot;
-						leftPanel.addChild(kObj);
 
 						this.HsTri1 = new zim.Triangle(
 							Math.sqrt(20000),
@@ -242,24 +238,19 @@
 							this.frame.tin
 						);
 						this.HsTri1.borderColor = "#CCCCCC";
-						this.HsTri1.regY -= Math.sqrt(20000) / 4;
-						this.HsTri1.x = this.mapData.sTri1.x + 600;
-						this.HsTri1.y = this.mapData.sTri1.y;
-						this.HsTri1.rotation = this.mapData.sTri1.rot;
-						leftPanel.addChild(this.HsTri1);
+						kObj.addChild(this.HsTri1);
+
+						kObj.regX = 0;
+						kObj.regY = -Math.sqrt(20000) / 4;
+						leftPanel.addChild(kObj);
 					}
 					if (this.mapData.sTri2.used === true) {
-						var kObj = new zim.Triangle(
-							Math.sqrt(20000),
-							100,
-							100,
-							"#CCCCCC"
+						var kObj = new zim.Container()
+							.rot(this.mapData.sTri2.rot)
+							.loc(this.mapData.sTri2.x + 600, this.mapData.sTri2.y);
+						kObj.addChild(
+							new zim.Triangle(Math.sqrt(20000), 100, 100, "#CCCCCC")
 						);
-						kObj.regY -= Math.sqrt(20000) / 4;
-						kObj.loc(this.mapData.sTri2.x + 600, this.mapData.sTri2.y);
-						kObj.rot(this.mapData.sTri2.rot);
-						leftPanel.addChild(kObj);
-
 						this.HsTri2 = new zim.Triangle(
 							Math.sqrt(20000),
 							100,
@@ -268,24 +259,18 @@
 							this.frame.tin
 						);
 						this.HsTri2.borderColor = "#CCCCCC";
-						this.HsTri2.regY -= Math.sqrt(20000) / 4;
-						this.HsTri2.x = this.mapData.sTri2.x + 600;
-						this.HsTri2.y = this.mapData.sTri2.y;
-						this.HsTri2.rotation = this.mapData.sTri2.rot;
-						leftPanel.addChild(this.HsTri2);
+						kObj.addChild(this.HsTri2);
+						kObj.regX = 0;
+						kObj.regY = -Math.sqrt(20000) / 4;
+						leftPanel.addChild(kObj);
 					}
 					if (this.mapData.lTri1.used === true) {
-						var kObj = new zim.Triangle(
-							Math.sqrt(80000),
-							200,
-							200,
-							"#CCCCCC"
+						var kObj = new zim.Container()
+							.rot(this.mapData.lTri1.rot)
+							.loc(this.mapData.lTri1.x + 600, this.mapData.lTri1.y);
+						kObj.addChild(
+							new zim.Triangle(Math.sqrt(80000), 200, 200, "#CCCCCC")
 						);
-						kObj.regY -= Math.sqrt(80000) / 4;
-						kObj.loc(this.mapData.lTri1.x + 600, this.mapData.lTri1.y);
-						kObj.rot(this.mapData.lTri1.rot);
-						leftPanel.addChild(kObj);
-
 						this.HlTri1 = new zim.Triangle(
 							Math.sqrt(80000),
 							200,
@@ -294,24 +279,19 @@
 							this.frame.tin
 						);
 						this.HlTri1.borderColor = "#CCCCCC";
-						this.HlTri1.regY -= Math.sqrt(80000) / 4;
-						this.HlTri1.x = this.mapData.lTri1.x + 600;
-						this.HlTri1.y = this.mapData.lTri1.y;
-						this.HlTri1.rotation = this.mapData.lTri1.rot;
-						leftPanel.addChild(this.HlTri1);
+						kObj.addChild(this.HlTri1);
+						kObj.regX = 0;
+						kObj.regY = -Math.sqrt(80000) / 4;
+
+						leftPanel.addChild(kObj);
 					}
 					if (this.mapData.lTri2.used === true) {
-						var kObj = new zim.Triangle(
-							Math.sqrt(80000),
-							200,
-							200,
-							"#CCCCCC"
+						var kObj = new zim.Container()
+							.rot(this.mapData.lTri2.rot)
+							.loc(this.mapData.lTri2.x + 600, this.mapData.lTri2.y);
+						kObj.addChild(
+							new zim.Triangle(Math.sqrt(80000), 200, 200, "#CCCCCC")
 						);
-						kObj.regY -= Math.sqrt(80000) / 4;
-						kObj.loc(this.mapData.lTri2.x + 600, this.mapData.lTri2.y);
-						kObj.rot(this.mapData.lTri2.rot);
-						leftPanel.addChild(kObj);
-
 						this.HlTri2 = new zim.Triangle(
 							Math.sqrt(80000),
 							200,
@@ -320,56 +300,55 @@
 							this.frame.tin
 						);
 						this.HlTri2.borderColor = "#CCCCCC";
-						this.HlTri2.regY -= Math.sqrt(80000) / 4;
-						this.HlTri2.x = this.mapData.lTri2.x + 600;
-						this.HlTri2.y = this.mapData.lTri2.y;
-						this.HlTri2.rotation = this.mapData.lTri2.rot;
-						leftPanel.addChild(this.HlTri2);
+						kObj.addChild(this.HlTri2);
+						kObj.regX = 0;
+						kObj.regY = -Math.sqrt(80000) / 4;
+						leftPanel.addChild(kObj);
 					}
 					if (this.mapData.mTri.used === true) {
-						var kObj = new zim.Triangle(
-							Math.sqrt(40000),
-							Math.sqrt(20000),
-							Math.sqrt(20000),
-							"#CCCCCC"
+						var kObj = new zim.Container()
+							.rot(this.mapData.mTri.rot)
+							.loc(this.mapData.mTri.x + 600, this.mapData.mTri.y);
+						kObj.addChild(
+							new zim.Triangle(
+								200,
+								Math.sqrt(20000),
+								Math.sqrt(20000),
+								"#CCCCCC"
+							)
 						);
-						kObj.regY -= 50;
-						kObj.loc(this.mapData.mTri.x + 600, this.mapData.mTri.y);
-						kObj.rot(this.mapData.mTri.rot);
-						leftPanel.addChild(kObj);
 						this.HmTri = new zim.Triangle(
-							Math.sqrt(40000),
+							200,
 							Math.sqrt(20000),
 							Math.sqrt(20000),
 							this.frame.clear,
 							this.frame.tin
 						);
 						this.HmTri.borderColor = "#CCCCCC";
-						this.HmTri.regY -= 50;
-						this.HmTri.x = this.mapData.mTri.x + 600;
-						this.HmTri.y = this.mapData.mTri.y;
-						this.HmTri.rotation = this.mapData.mTri.rot;
-						leftPanel.addChild(this.HmTri);
+						kObj.addChild(this.HmTri);
+						kObj.regX = 0;
+						kObj.regY = -50;
+
+						leftPanel.addChild(kObj);
 					}
 					if (this.mapData.mRect.used === true) {
-						var kObj = new zim.Rectangle(100, 100, "#CCCCCC");
-						kObj.centerReg();
-						kObj.loc(this.mapData.mRect.x + 600, this.mapData.mRect.y);
-						kObj.rot(this.mapData.mRect.rot);
-						leftPanel.addChild(kObj);
-
+						var kObj = new zim.Container()
+							.rot(this.mapData.mRect.rot)
+							.loc(this.mapData.mRect.x + 600, this.mapData.mRect.y);
+						kObj.addChild(
+							new zim.Rectangle(100, 100, "#CCCCCC").centerReg()
+						);
 						this.HmRect = new zim.Rectangle(
 							100,
 							100,
 							this.frame.clear,
 							this.frame.tin
-						);
-						this.HmRect.centerReg();
+						).centerReg();
+
 						this.HmRect.borderColor = "#CCCCCC";
-						this.HmRect.x = this.mapData.mRect.x + 600;
-						this.HmRect.y = this.mapData.mRect.y;
-						this.HmRect.rotation = this.mapData.mRect.rot;
-						leftPanel.addChild(this.HmRect);
+
+						kObj.addChild(this.HmRect);
+						leftPanel.addChild(kObj);
 					}
 					if (this.mapData.mParel.used === true) {
 						var kObj = new zim.Container()
@@ -379,10 +358,12 @@
 								Math.sqrt(5000),
 								3 * Math.sqrt(5000)
 							)
-							.reg(50, 350);
+							.reg(50, 350)
+							.rot(this.mapData.mParel.rot);
 
+						kObj.y = this.mapData.mParel.y;
+						kObj.x = this.mapData.mParel.x + 600;
 						this.HmParel = new zim.Shape();
-						this.HmParel.graphics.clear();
 						this.HmParel.graphics
 							.setStrokeStyle(1)
 							.beginStroke("#CCCCCC")
@@ -392,10 +373,6 @@
 							.lineTo(50 + Math.sqrt(5000), 350 + Math.sqrt(5000))
 							.lineTo(50 + Math.sqrt(5000), 350 - Math.sqrt(5000))
 							.lineTo(50, 350);
-
-						kObj.x = this.mapData.mParel.x + 600;
-						kObj.y = this.mapData.mParel.y;
-						kObj.rot(this.mapData.mParel.rot);
 						kObj.addChild(this.HmParel);
 						leftPanel.addChild(kObj);
 					}
@@ -439,8 +416,6 @@
 					});
 
 					this.sTri1.on("pressmove", e => {
-						if (this.mapData.sTri1.used || this.mapData.sTri2.used) {
-						}
 						this.onMoveEvent(this.sTri1, 20000);
 						this.checkAnswer();
 					});
