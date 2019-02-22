@@ -55,7 +55,7 @@
 					this.sTri1 = new zim.Container()
 						.place("triangle")
 						.rot(90)
-						.loc(50, 100);
+						.loc(120, 100);
 					this.sTri1.addChild(
 						new zim.Triangle(Math.sqrt(20000), 100, 100, specRed)
 					);
@@ -74,8 +74,8 @@
 
 					this.lTri1 = new zim.Container()
 						.place("triangle")
-						.rot(180)
-						.loc(190, 110);
+						.rot(45)
+						.loc(300, 10);
 					this.lTri1.addChild(
 						new zim.Triangle(Math.sqrt(80000), 200, 200, specRed)
 					);
@@ -93,8 +93,8 @@
 
 					this.lTri2 = new zim.Container()
 						.place("triangle")
-						.rot(135)
-						.loc(185, 270);
+						.rot(0)
+						.loc(180, 115);
 					this.lTri2.addChild(
 						new zim.Triangle(Math.sqrt(80000), 200, 200, specRed)
 					);
@@ -112,8 +112,8 @@
 
 					this.mRect = new zim.Container()
 						.place("Rectangle")
-						.rot(135)
-						.loc(280, 370);
+						.rot(45)
+						.loc(200, 360);
 					this.mRect.addChild(
 						new zim.Rectangle(100, 100, specRed).centerReg()
 					);
@@ -128,8 +128,8 @@
 
 					this.sTri2 = new zim.Container()
 						.place("triangle")
-						.rot(45)
-						.loc(285, 500);
+						.rot(270)
+						.loc(230, 485);
 					this.sTri2.addChild(
 						new zim.Triangle(Math.sqrt(20000), 100, 100, specRed)
 					);
@@ -147,29 +147,34 @@
 
 					this.mTri = new zim.Container()
 						.place("triangle")
-						.rot(135)
-						.loc(140, 570);
+						.rot(0)
+						.loc(150, 460);
 					this.mTri.addChild(
-						new zim.Triangle(Math.sqrt(45000), 150, 150, specRed)
+						new zim.Triangle(
+							200,
+							Math.sqrt(20000),
+							Math.sqrt(20000),
+							specRed
+						)
 					);
 					this.mTri.addChild(
 						new zim.Triangle(
-							Math.sqrt(45000),
-							150,
-							150,
+							200,
+							Math.sqrt(20000),
+							Math.sqrt(20000),
 							this.frame.clear,
 							this.frame.tin
 						)
 					);
 					this.mTri.regX = 0;
-					this.mTri.regY = -Math.sqrt(45000) / 4;
+					this.mTri.regY = -50;
 
-					rightPanel.addChild(this.sTri1);
-					rightPanel.addChild(this.sTri2);
-					rightPanel.addChild(this.lTri1);
-					rightPanel.addChild(this.lTri2);
-					rightPanel.addChild(this.mTri);
-					rightPanel.addChild(this.mRect);
+					if (this.mapData.sTri1.used) rightPanel.addChild(this.sTri1);
+					if (this.mapData.sTri2.used) rightPanel.addChild(this.sTri2);
+					if (this.mapData.lTri1.used) rightPanel.addChild(this.lTri1);
+					if (this.mapData.lTri2.used) rightPanel.addChild(this.lTri2);
+					if (this.mapData.mTri.used) rightPanel.addChild(this.mTri);
+					if (this.mapData.mRect.used) rightPanel.addChild(this.mRect);
 					rightPanel.x = 600;
 					rightPanel.y = 0;
 
@@ -296,24 +301,24 @@
 					}
 					if (this.mapData.mTri.used === true) {
 						var kObj = new zim.Triangle(
-							Math.sqrt(45000),
-							150,
-							150,
+							Math.sqrt(40000),
+							Math.sqrt(20000),
+							Math.sqrt(20000),
 							"#CCCCCC"
 						);
-						kObj.regY -= Math.sqrt(45000) / 4;
+						kObj.regY -= 50;
 						kObj.loc(this.mapData.mTri.x + 600, this.mapData.mTri.y);
 						kObj.rot(this.mapData.mTri.rot);
 						leftPanel.addChild(kObj);
 						this.HmTri = new zim.Triangle(
-							Math.sqrt(45000),
-							150,
-							150,
+							Math.sqrt(40000),
+							Math.sqrt(20000),
+							Math.sqrt(20000),
 							this.frame.clear,
 							this.frame.tin
 						);
 						this.HmTri.borderColor = "#CCCCCC";
-						this.HmTri.regY -= Math.sqrt(45000) / 4;
+						this.HmTri.regY -= 50;
 						this.HmTri.x = this.mapData.mTri.x + 600;
 						this.HmTri.y = this.mapData.mTri.y;
 						this.HmTri.rotation = this.mapData.mTri.rot;
@@ -376,22 +381,28 @@
 
 					this.sTri1.on("pressmove", e => {
 						this.onMoveEvent(this.sTri1, 20000);
+						this.checkAnswer();
 					});
 					this.sTri2.on("pressmove", e => {
 						this.onMoveEvent(this.sTri2, 20000);
+						this.checkAnswer();
 					});
 					this.lTri1.on("pressmove", e => {
 						this.onMoveEvent(this.lTri1, 80000);
+						this.checkAnswer();
 					});
 					this.lTri2.on("pressmove", e => {
 						this.onMoveEvent(this.lTri2, 80000);
+						this.checkAnswer();
 					});
 					this.mTri.on("pressmove", e => {
-						this.onMoveEvent(this.mTri, 45000);
+						this.onMoveEvent(this.mTri, 40000);
+						this.checkAnswer();
 					});
 					this.mRect.on("pressmove", e => {
 						this.mRect.x = this.mRect.x - (this.mRect.x % 10);
 						this.mRect.y = this.mRect.y - (this.mRect.y % 10);
+						this.checkAnswer();
 					});
 				}); // end of ready
 			},
@@ -402,7 +413,86 @@
 				}
 				this.stage.update();
 			},
-			checkAnswer() {},
+			checkAnswer() {
+				if (this.completed) return;
+				if (this.mapData.sTri1.used) {
+					if (
+						!this.compareObjects(
+							this.sTri1,
+							this.sTri2,
+							this.mapData.sTri1
+						)
+					)
+						return false;
+				}
+
+				if (this.mapData.sTri2.used) {
+					if (
+						!this.compareObjects(
+							this.sTri1,
+							this.sTri2,
+							this.mapData.sTri2
+						)
+					)
+						return false;
+				}
+
+				if (this.mapData.lTri1.used) {
+					if (
+						!this.compareObjects(
+							this.lTri1,
+							this.lTri2,
+							this.mapData.lTri1
+						)
+					)
+						return false;
+				}
+				if (this.mapData.lTri2.used) {
+					if (
+						!this.compareObjects(
+							this.lTri1,
+							this.lTri2,
+							this.mapData.lTri2
+						)
+					)
+						return false;
+				}
+				if (this.mapData.mTri.used) {
+					if (
+						!this.compareObjects(
+							this.mTri,
+							this.mTri,
+							this.mapData.mTri
+						)
+					)
+						return false;
+				}
+				if (this.mapData.mRect.used) {
+					if (
+						!this.compareObjects(
+							this.mRect,
+							this.mRect,
+							this.mapData.mRect
+						)
+					)
+						return false;
+				}
+				this.completed = true;
+				$("#componentView").html("Completed");
+				$("#hintBut").hide();
+				this.stage.update();
+				return true;
+			},
+			compareObjects(obj1, obj2, obj3) {
+				return (
+					(obj1.x === obj3.x &&
+						obj1.y === obj3.y &&
+						obj1.rotation === obj3.rot) ||
+					(obj2.x === obj3.x &&
+						obj2.y === obj3.y &&
+						obj2.rotation === obj3.rot)
+				);
+			},
 			showHint() {
 				this.hintShow = !this.hintShow;
 				var bColor = this.hintShow ? "#AAAAAA" : "#CCCCCC";
@@ -431,5 +521,7 @@
 		height: 602px;
 		border: 1px solid black;
 		float: left;
+		text-align: center;
+		font-size: 72px;
 	}
 </style>

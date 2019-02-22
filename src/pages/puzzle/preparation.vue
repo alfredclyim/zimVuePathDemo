@@ -17,6 +17,7 @@
 				lTri1: null,
 				lTri2: null,
 				mRect: null,
+				mParel: null,
 				stageW: 0,
 				stageH: 0,
 				stage: null
@@ -45,7 +46,7 @@
 					this.sTri1 = new zim.Container()
 						.place("triangle")
 						.rot(90)
-						.loc(50, 100);
+						.loc(120, 100);
 					this.sTri1.addChild(
 						new zim.Triangle(Math.sqrt(20000), 100, 100, specRed)
 					);
@@ -64,8 +65,8 @@
 
 					this.lTri1 = new zim.Container()
 						.place("triangle")
-						.rot(180)
-						.loc(190, 110);
+						.rot(45)
+						.loc(300, 10);
 					this.lTri1.addChild(
 						new zim.Triangle(Math.sqrt(80000), 200, 200, specRed)
 					);
@@ -83,8 +84,8 @@
 
 					this.lTri2 = new zim.Container()
 						.place("triangle")
-						.rot(135)
-						.loc(185, 270);
+						.rot(0)
+						.loc(180, 115);
 					this.lTri2.addChild(
 						new zim.Triangle(Math.sqrt(80000), 200, 200, specRed)
 					);
@@ -102,8 +103,8 @@
 
 					this.mRect = new zim.Container()
 						.place("Rectangle")
-						.rot(135)
-						.loc(280, 370);
+						.rot(45)
+						.loc(200, 360);
 					this.mRect.addChild(
 						new zim.Rectangle(100, 100, specRed).centerReg()
 					);
@@ -118,8 +119,8 @@
 
 					this.sTri2 = new zim.Container()
 						.place("triangle")
-						.rot(45)
-						.loc(285, 500);
+						.rot(270)
+						.loc(230, 485);
 					this.sTri2.addChild(
 						new zim.Triangle(Math.sqrt(20000), 100, 100, specRed)
 					);
@@ -137,22 +138,27 @@
 
 					this.mTri = new zim.Container()
 						.place("triangle")
-						.rot(135)
-						.loc(140, 570);
+						.rot(0)
+						.loc(150, 460);
 					this.mTri.addChild(
-						new zim.Triangle(Math.sqrt(45000), 150, 150, specRed)
+						new zim.Triangle(
+							200,
+							Math.sqrt(20000),
+							Math.sqrt(20000),
+							specRed
+						)
 					);
 					this.mTri.addChild(
 						new zim.Triangle(
-							Math.sqrt(45000),
-							150,
-							150,
+							200,
+							Math.sqrt(20000),
+							Math.sqrt(20000),
 							this.frame.clear,
 							this.frame.tin
 						)
 					);
 					this.mTri.regX = 0;
-					this.mTri.regY = -Math.sqrt(45000) / 4;
+					this.mTri.regY = -50;
 
 					rightPanel.addChild(this.sTri1);
 					rightPanel.addChild(this.sTri2);
@@ -227,7 +233,7 @@
 						this.onMoveEvent(this.lTri2, 80000);
 					});
 					this.mTri.on("pressmove", e => {
-						this.onMoveEvent(this.mTri, 45000);
+						this.onMoveEvent(this.mTri, 40000);
 					});
 					this.mRect.on("pressmove", e => {
 						this.mRect.x = this.mRect.x - (this.mRect.x % 10);
@@ -236,16 +242,7 @@
 				}); // end of ready
 			},
 			onMoveEvent(obj, r) {
-				/*if (obj.rotation === 90) {
-							obj.x = obj.x - (obj.x % 10) - ((Math.sqrt(r) / 4) % 10);
-							obj.y = obj.y - (obj.y % 10);
-						} else if (this.sTri2.rotation === 270) {
-							obj.x = obj.x - (obj.x % 10) + ((Math.sqrt(r) / 4) % 10);
-							obj.y = obj.y - (obj.y % 10);
-						} else if (obj.rotation === 0 || obj.rotation == 180) {
-							obj.x = obj.x - (obj.x % 10);
-							obj.y = obj.y - (obj.y % 10) - ((Math.sqrt(r) / 4) % 10);
-						} else*/ {
+				{
 					obj.x = obj.x - (obj.x % 10);
 					obj.y = obj.y - (obj.y % 10);
 				}
