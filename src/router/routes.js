@@ -2,7 +2,7 @@
 const routes = [
   {
     path: '/',
-    component: () => import('pages/pathDemo.vue')
+    component: () => import('pages/physics.vue')
   }
 ]
 
