@@ -266,19 +266,21 @@
 						this.onMoveEvent(this.mTri, 40000);
 					});
 					this.mRect.on("pressmove", e => {
-						this.mRect.x = this.mRect.x - (this.mRect.x % 2);
-						this.mRect.y = this.mRect.y - (this.mRect.y % 2);
+						this.mRect.x = this.mRect.x - (this.mRect.x % Math.sqrt(8));
+						this.mRect.y = this.mRect.y - (this.mRect.y % Math.sqrt(8));
 					});
 					this.mParel.on("pressmove", e => {
-						this.mParel.x = this.mParel.x - (this.mParel.x % 2);
-						this.mParel.y = this.mParel.y - (this.mParel.y % 2);
+						this.mParel.x =
+							this.mParel.x - (this.mParel.x % Math.sqrt(8));
+						this.mParel.y =
+							this.mParel.y - (this.mParel.y % Math.sqrt(8));
 					});
 				}); // end of ready
 			},
 			onMoveEvent(obj, r) {
 				{
-					obj.x = obj.x - (obj.x % 2);
-					obj.y = obj.y - (obj.y % 2);
+					obj.x = obj.x - (obj.x % Math.sqrt(8));
+					obj.y = obj.y - (obj.y % Math.sqrt(8));
 				}
 				this.stage.update();
 			},
