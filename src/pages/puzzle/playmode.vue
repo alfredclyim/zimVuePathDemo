@@ -382,6 +382,7 @@
 							.reg(50, 350);
 
 						this.HmParel = new zim.Shape();
+						this.HmParel.graphics.clear();
 						this.HmParel.graphics
 							.setStrokeStyle(1)
 							.beginStroke("#CCCCCC")
@@ -458,21 +459,21 @@
 						this.checkAnswer();
 					});
 					this.mRect.on("pressmove", e => {
-						this.mRect.x = this.mRect.x - (this.mRect.x % 10);
-						this.mRect.y = this.mRect.y - (this.mRect.y % 10);
+						this.mRect.x = this.mRect.x - (this.mRect.x % 2);
+						this.mRect.y = this.mRect.y - (this.mRect.y % 2);
 						this.checkAnswer();
 					});
 					this.mParel.on("pressmove", e => {
-						this.mParel.x = this.mParel.x - (this.mParel.x % 10);
-						this.mParel.y = this.mParel.y - (this.mParel.y % 10);
+						this.mParel.x = this.mParel.x - (this.mParel.x % 2);
+						this.mParel.y = this.mParel.y - (this.mParel.y % 2);
 						this.checkAnswer();
 					});
 				}); // end of ready
 			},
 			onMoveEvent(obj, r) {
 				{
-					obj.x = obj.x - (obj.x % 10);
-					obj.y = obj.y - (obj.y % 10);
+					obj.x = obj.x - (obj.x % 2);
+					obj.y = obj.y - (obj.y % 2);
 				}
 				this.stage.update();
 			},
@@ -573,8 +574,10 @@
 				this.hintShow = !this.hintShow;
 				var bColor = this.hintShow ? "#AAAAAA" : "#CCCCCC";
 				if (this.HmParel) {
+					this.HmParel.graphics.clear();
 					this.HmParel.graphics
 						.setStrokeStyle(1)
+						.beginFill("#CCCCCC")
 						.beginStroke(bColor)
 						.moveTo(50, 350)
 						.lineTo(50, 350 + 2 * Math.sqrt(5000))
