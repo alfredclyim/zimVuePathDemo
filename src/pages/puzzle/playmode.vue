@@ -501,7 +501,7 @@
 				}); // end of ready
 			},
 			placeRotateButton(type, length) {
-				this.rotateButton.x = this.selectedObj.x + 600;
+				this.rotateButton.x = this.selectedObj.x + 600 + 25;
 				this.rotateButton.y = this.selectedObj.y;
 				this.stage.update();
 			},
