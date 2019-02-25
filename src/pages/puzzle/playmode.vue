@@ -2,15 +2,6 @@
 	<div style="padding:10vh;">
 		<div id="componentView" class="ComponentViewS"></div>
 		<q-btn style="margin-left:5px" color="primary" no-caps @click="showHint()" id="hintBut">Show Hint</q-btn>
-		<br>
-		<q-btn
-			id="rotBut"
-			style="margin:5px"
-			color="primary"
-			no-caps
-			@click="rotateSelected()"
-			:disabled="selectedObj === null"
-		>Rotate</q-btn>
 	</div>
 </template>
 
@@ -40,10 +31,27 @@
 				stage: null,
 				completed: false,
 				hintShow: false,
-				selectedObj: null
+				selectedObj: null,
+				rotateButton: null
 			};
 		},
 		methods: {
+			addRotateButton() {
+				const load = this.frame.loadAssets("rotateIcon.png", "../statics/");
+
+				load.on("complete", () => {
+					this.rotateButton = this.frame
+						.asset("rotateIcon.png")
+						.centerReg()
+						.loc(-100, -100);
+					this.stage.addChild(this.rotateButton);
+					this.stage.update();
+
+					this.rotateButton.on("click", () => {
+						this.rotateSelected();
+					});
+				});
+			},
 			initMapFields() {
 				this.frame = new zim.Frame({
 					scaling: "componentView",
@@ -398,53 +406,70 @@
 
 					this.sTri1.on("click", e => {
 						this.selectedObj = this.sTri1;
+						this.placeRotateButton(0, 0);
 						this.stage.update();
 					});
 					this.sTri2.on("click", e => {
 						this.selectedObj = this.sTri2;
+						this.placeRotateButton(0, 0);
 						this.stage.update();
 					});
 					this.lTri1.on("click", e => {
 						this.selectedObj = this.lTri1;
+						this.placeRotateButton(0, 0);
 						this.stage.update();
 					});
 					this.lTri2.on("click", e => {
 						this.selectedObj = this.lTri2;
+						this.placeRotateButton(0, 0);
 						this.stage.update();
 					});
 					this.mTri.on("click", e => {
 						this.selectedObj = this.mTri;
+						this.placeRotateButton(0, 0);
 						this.stage.update();
 					});
 
 					this.mRect.on("click", e => {
 						this.selectedObj = this.mRect;
+						this.placeRotateButton(0, 0);
 						this.stage.update();
 					});
 
 					this.mParel.on("click", e => {
 						this.selectedObj = this.mParel;
+						this.placeRotateButton(0, 0);
 						this.stage.update();
 					});
 
 					this.sTri1.on("pressmove", e => {
+						this.selectedObj = this.sTri1;
 						this.onMoveEvent(this.sTri1, 20000);
+						this.placeRotateButton(0, 0);
 						this.checkAnswer();
 					});
 					this.sTri2.on("pressmove", e => {
+						this.selectedObj = this.sTri2;
 						this.onMoveEvent(this.sTri2, 20000);
+						this.placeRotateButton(0, 0);
 						this.checkAnswer();
 					});
 					this.lTri1.on("pressmove", e => {
+						this.selectedObj = this.lTri1;
 						this.onMoveEvent(this.lTri1, 80000);
+						this.placeRotateButton(0, 0);
 						this.checkAnswer();
 					});
 					this.lTri2.on("pressmove", e => {
+						this.selectedObj = this.lTri2;
 						this.onMoveEvent(this.lTri2, 80000);
+						this.placeRotateButton(0, 0);
 						this.checkAnswer();
 					});
 					this.mTri.on("pressmove", e => {
+						this.selectedObj = this.mTri;
 						this.onMoveEvent(this.mTri, 40000);
+						this.placeRotateButton(0, 0);
 						this.checkAnswer();
 					});
 					this.mRect.on("pressmove", e => {
@@ -454,6 +479,9 @@
 						this.mRect.y =
 							parseFloat(parseInt(this.mRect.y / Math.sqrt(8))) *
 							Math.sqrt(8);
+
+						this.selectedObj = this.mRect;
+						this.placeRotateButton(0, 0);
 						this.checkAnswer();
 					});
 					this.mParel.on("pressmove", e => {
@@ -463,9 +491,19 @@
 						this.mParel.y =
 							parseFloat(parseInt(this.mParel.y / Math.sqrt(8))) *
 							Math.sqrt(8);
+
+						this.selectedObj = this.mParel;
+						this.placeRotateButton(0, 0);
 						this.checkAnswer();
 					});
+
+					this.addRotateButton();
 				}); // end of ready
+			},
+			placeRotateButton(type, length) {
+				this.rotateButton.x = this.selectedObj.x + 600;
+				this.rotateButton.y = this.selectedObj.y;
+				this.stage.update();
 			},
 			rotateSelected() {
 				this.selectedObj.rotation = (this.selectedObj.rotation + 45) % 360;
